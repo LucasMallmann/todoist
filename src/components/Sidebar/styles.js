@@ -1,10 +1,51 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   position: fixed;
   top: 100px;
-  left: 100px;
+  left: 140px;
+  width: 250px;
+`;
 
-  width: 300px;
-  background: tomato;
+export const Navigation = styled(Link)`
+  text-decoration: none;
+  /* color: #333; */
+  color: ${props => (props.active ? '#000' : '#333')};
+  display: block;
+
+  border-radius: 4px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${darken(0.07, '#f2f2f2')};
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+
+    > div {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      margin-left: 12px;
+      font-size: 14px;
+      /* font-weight: ${props => (props.active ? 'bold' : 'normal')}; */
+    }
+
+    small {
+      margin-left: 8px;
+    }
+  }
+`;
+
+export const Separator = styled.hr`
+  margin: 12px 0;
+  color: #ddd;
 `;
