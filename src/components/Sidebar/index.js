@@ -2,10 +2,12 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Header = () => (
+const Sidebar = () => (
   <Container>
-    <span>ToDo App</span>
+    <ul>
+      <li>oi</li>
+    </ul>
   </Container>
 );
 
-export default Header;
+export default Sidebar;

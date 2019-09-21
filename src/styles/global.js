@@ -11,7 +11,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #fafafa;
+    background: #F2F2F2;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -19,13 +19,24 @@ export default createGlobalStyle`
     font: 14px Roboto, sans-serif;
   }
 
-  #root {
+  /* #root {
     max-width: 1020px;
     margin: 0 auto;
     padding: 0 20px 50px;
-  }
+  } */
 
   button {
     cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0;
+      margin: 0;
+    }
   }
 `;
