@@ -10,25 +10,6 @@ import { Container, TodoContainer } from './styles';
 import Todo from '../../components/Todo';
 import TodoForm from '../../components/TodoForm';
 
-const todos = [
-  {
-    id: 1,
-    text: 'Fazer Tarefa',
-  },
-  {
-    id: 2,
-    text: 'Fazer Tarefa',
-  },
-  {
-    id: 3,
-    text: 'Fazer Tarefa',
-  },
-  {
-    id: 4,
-    text: 'Fazer Tarefa',
-  },
-];
-
 class Home extends Component {
   state = {
     selectedTodo: {},

@@ -2,19 +2,33 @@
   "todos": [
     {
       "id": 1,
-      "task": "Fazer Primeira"
+      "task": "Ir na academia",
+      "category": "health"
     },
     {
       "id": 2,
-      "task": "Fazer Segunda"
+      "task": "Cozinha brócolis",
+      "category": "health"
     },
     {
       "id": 3,
-      "task": "Fazer Terceira"
+      "task": "Finalizar o acabamento do projeto",
+      "category": "work"
     },
     {
       "id": 4,
-      "task": "Fazer Quarta"
+      "task": "Fazer Segunda",
+      "category": "work"
+    },
+    {
+      "id": 5,
+      "task": "Fazer Terceira",
+      "category": "personal"
+    },
+    {
+      "id": 6,
+      "task": "Fazer Quarta",
+      "category": "shopping"
     }
   ]
 }
