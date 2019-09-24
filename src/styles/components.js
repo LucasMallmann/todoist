@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   /* margin-top: 100px; */
-  padding-top: 100px;
-  margin-left: 400px;
-  margin-right: 150px;
+  padding-top: 80px;
+  margin-left: 450px;
+  margin-right: 250px;
 
   background: #fafafa;
   border-left: 1px solid #dedede;
   border-right: 1px solid #dedede;
 
-  height: 2000px;
+  min-height: 100vh;
 `;

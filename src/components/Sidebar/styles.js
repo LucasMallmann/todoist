@@ -5,13 +5,12 @@ import { darken } from 'polished';
 export const Container = styled.div`
   position: fixed;
   top: 100px;
-  left: 140px;
+  left: 190px;
   width: 250px;
 `;
 
 export const Navigation = styled(Link)`
   text-decoration: none;
-  /* color: #333; */
   color: ${props => (props.active ? '#000' : '#333')};
   display: block;
 
@@ -36,7 +35,6 @@ export const Navigation = styled(Link)`
     span {
       margin-left: 12px;
       font-size: 14px;
-      /* font-weight: ${props => (props.active ? 'bold' : 'normal')}; */
     }
 
     small {
