@@ -1,5 +1,3 @@
-const categories = ['health', 'work', 'personal', 'shopping', 'book'];
-
 const mapCategory = {
   health: 'Saúde',
   work: 'Trabalho',

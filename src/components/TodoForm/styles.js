@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Form } from '@rocketseat/unform';
 
 export const StyledForm = styled.form`
   width: 100%;
