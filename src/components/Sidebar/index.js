@@ -140,7 +140,7 @@ class Sidebar extends Component {
               <small>{shopping} itens</small>
             </li>
           </Navigation>
-          <Navigation to="/">
+          <Navigation to="/?category=book">
             <li>
               <div>
                 <MdBook size={20} color="#02733E" />

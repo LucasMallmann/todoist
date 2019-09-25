@@ -11,6 +11,7 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 
 import { ActionCreators as TodosActions } from '../../store/ducks/todos';
+import { translateCategory } from '../../utils/translate';
 
 import { Container, TodoContainer } from './styles';
 import Todo from '../../components/Todo';
@@ -106,7 +107,11 @@ class Home extends Component {
 
     return (
       <Container>
-        {category ? <h1>Tarefas para {category}</h1> : <h1>Página inicial</h1>}
+        {category ? (
+          <h1>Tarefas para {translateCategory(category)}</h1>
+        ) : (
+          <h1>Página inicial</h1>
+        )}
 
         <TodoContainer
           inlineStyle={{ marginTop: '20px' }}
