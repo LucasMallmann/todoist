@@ -1,3 +1,5 @@
+/* eslint-disable react/no-did-update-set-state */
+/* eslint-disable operator-assignment */
 import React, { Component } from 'react';
 import {
   MdHome,
@@ -15,12 +17,7 @@ import { ActionCreators as TodosActions } from '../../store/ducks/todos';
 
 import { Container, Navigation, Separator } from './styles';
 
-const categories = {
-  health: 'health',
-  work: 'work',
-  personal: 'personal',
-  shopping: 'shopping',
-};
+const categories = ['health', 'work', 'personal', 'shopping', 'book'];
 
 class Sidebar extends Component {
   state = {
@@ -28,32 +25,53 @@ class Sidebar extends Component {
     work: 0,
     personal: 0,
     shopping: 0,
+    book: 0,
   };
 
-  componentDidMount() {
-    const { todos: { data } } = this.props;
-    console.log(this.props);
-  }
-
-  splitByCategory = () => {
-
-  }
-
   componentDidUpdate(prevProps) {
-    console.log(this.props);
+    if (prevProps.todos.data.length === this.props.todos.data.length) {
+      return;
+    }
+
+    const reducer = (acc, category) => {
+      acc[category] = this.countCategory(category);
+      return acc;
+    };
+
+    const result = categories.reduce(reducer, {});
+
+    this.setState(result);
   }
+
+  /**
+   * Count the category occurrences in the todo list
+   * @param {String} category
+   */
+  countCategory = category => {
+    const {
+      todos: { data },
+    } = this.props;
+    const total = data.reduce((accumulator, todo) => {
+      return accumulator + (todo.category === category);
+    }, 0);
+
+    return total;
+  };
 
   render() {
+    const { health, work, personal, shopping, book } = this.state;
+    const total = this.props.todos.data.length;
+
     return (
       <Container>
         <ul>
-          <Navigation to="/" active>
+          <Navigation to="/">
             <li>
               <div>
                 <MdHome size={20} />
                 <span>Página Principal</span>
               </div>
-              <small>3 itens</small>
+              <small>{total} itens</small>
             </li>
           </Navigation>
           <Navigation to="/">
@@ -62,7 +80,7 @@ class Sidebar extends Component {
                 <MdDateRange size={20} />
                 <span>Hoje</span>
               </div>
-              <small>3 itens</small>
+              <small>{total} itens</small>
             </li>
           </Navigation>
         </ul>
@@ -76,7 +94,7 @@ class Sidebar extends Component {
                 <MdFavorite size={20} color="#D93644" />
                 <span>Saúde</span>
               </div>
-              <small>3 itens</small>
+              <small>{health} itens</small>
             </li>
           </Navigation>
           <Navigation to="/">
@@ -85,7 +103,7 @@ class Sidebar extends Component {
                 <MdWork size={20} color="#223946" />
                 <span>Trabalho</span>
               </div>
-              <small>3 itens</small>
+              <small>{work} itens</small>
             </li>
           </Navigation>
           <Navigation to="/">
@@ -94,7 +112,7 @@ class Sidebar extends Component {
                 <MdPerson size={20} color="#0367A6" />
                 <span>Pessoal</span>
               </div>
-              <small>3 itens</small>
+              <small>{personal} itens</small>
             </li>
           </Navigation>
           <Navigation to="/">
@@ -103,7 +121,7 @@ class Sidebar extends Component {
                 <MdAddShoppingCart size={20} color="#FF7830" />
                 <span>Compras</span>
               </div>
-              <small>3 itens</small>
+              <small>{shopping} itens</small>
             </li>
           </Navigation>
           <Navigation to="/">
@@ -112,7 +130,7 @@ class Sidebar extends Component {
                 <MdBook size={20} color="#02733E" />
                 <span>Livros</span>
               </div>
-              <small>3 itens</small>
+              <small>{book} itens</small>
             </li>
           </Navigation>
         </ul>

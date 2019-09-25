@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Navigation = styled(Link)`
   text-decoration: none;
-  color: ${props => (props.active ? '#000' : '#333')};
+  color: #333;
   display: block;
 
   border-radius: 4px;
