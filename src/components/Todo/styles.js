@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 
 export const TodoItem = styled.li`
   display: flex;
@@ -34,4 +34,7 @@ export const TodoItem = styled.li`
 
 export const Text = styled.span`
   margin-left: 14px;
+  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
+  font-style: ${props => (props.completed ? 'italic' : 'normal')};
+  color: inherit;
 `;

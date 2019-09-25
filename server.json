@@ -3,32 +3,38 @@
     {
       "id": 1,
       "task": "Ir na academia",
-      "category": "health"
+      "category": "health",
+      "completed": false
     },
     {
       "id": 2,
       "task": "Cozinha brócolis",
-      "category": "health"
+      "category": "health",
+      "completed": false
     },
     {
       "id": 3,
       "task": "Finalizar o acabamento do projeto",
-      "category": "work"
+      "category": "work",
+      "completed": false
     },
     {
       "id": 4,
       "task": "Fazer Segunda",
-      "category": "work"
+      "category": "work",
+      "completed": false
     },
     {
       "id": 5,
       "task": "Fazer Terceira",
-      "category": "personal"
+      "category": "personal",
+      "completed": false
     },
     {
       "id": 6,
       "task": "Fazer Quarta",
-      "category": "shopping"
+      "category": "shopping",
+      "completed": false
     }
   ]
 }

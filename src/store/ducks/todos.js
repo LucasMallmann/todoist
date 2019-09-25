@@ -5,6 +5,8 @@ export const Types = {
   GET_SUCCESS: '@todo/GET_SUCCESS',
   ADD_TODO: '@todo/ADD_TODO',
   REMOVE_TODO: '@todo/REMOVE_TODO',
+  UPDATE_TODO: '@todo/UPDATE_TODO',
+  COMPLETE_TODO: '@todo/COMPLETE_TODO',
 };
 
 const initialState = {
@@ -32,6 +34,25 @@ const reducer = (state = initialState, action) => {
           draft.data.splice(index, 1);
         }
       });
+    case Types.UPDATE_TODO:
+      return produce(state, draft => {
+        const index = draft.data.findIndex(
+          todo => todo.id === action.payload.todo.id
+        );
+
+        if (index >= 0) {
+          draft.data[index] = action.payload.todo;
+        }
+      });
+    case Types.COMPLETE_TODO:
+      return produce(state, draft => {
+        const index = draft.data.findIndex(t => t.id === action.payload.id);
+
+        if (index >= 0) {
+          draft.data[index].completed = true;
+        }
+      });
+
     default:
       return state;
   }
@@ -51,6 +72,14 @@ export const ActionCreators = {
   }),
   removeTodo: id => ({
     type: Types.REMOVE_TODO,
+    payload: { id },
+  }),
+  updateTodo: todo => ({
+    type: Types.UPDATE_TODO,
+    payload: { todo },
+  }),
+  completeTodo: id => ({
+    type: Types.COMPLETE_TODO,
     payload: { id },
   }),
 };

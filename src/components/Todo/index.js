@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
 import { MdClose, MdModeEdit } from 'react-icons/md';
 import ToolTip from 'react-tooltip';
 
@@ -11,25 +11,55 @@ import { TodoItem, Text } from './styles';
 
 import Checkbox from '../Checkbox';
 
-function Todo({ todo, onClickUpdate, removeTodo }) {
-  return (
-    <TodoItem>
-      <label>
-        <Checkbox checked={false} onChange={() => console.log('oi')} />
-        <Text>{todo.task}</Text>
-      </label>
+class Todo extends Component {
+  state = {
+    checked: false,
+  };
 
-      <div>
-        <MdModeEdit size={16} data-tip="Editar" onClick={onClickUpdate} />
-        <MdClose
-          size={16}
-          data-tip="Deletar"
-          onClick={() => removeTodo(todo.id)}
-        />
-        <ToolTip place="top" type="dark" effect="float" />
-      </div>
-    </TodoItem>
-  );
+  handleComplete = (e, todoSelected) => {
+    const { completeTodo, updateTodo } = this.props;
+
+    const todo = { ...todoSelected };
+
+    if (e.target.checked) {
+      todo.completed = true;
+    } else {
+      todo.completed = false;
+    }
+
+    updateTodo(todo);
+
+    this.setState({
+      checked: e.target.checked,
+    });
+  };
+
+  render() {
+    const { todo, onClickUpdate, removeTodo, updateTodo } = this.props;
+    const { checked } = this.state;
+
+    return (
+      <TodoItem>
+        <label>
+          <Checkbox
+            checked={checked}
+            onChange={e => this.handleComplete(e, todo)}
+          />
+          <Text completed={todo.completed}>{todo.task}</Text>
+        </label>
+
+        <div>
+          <MdModeEdit size={16} data-tip="Editar" onClick={onClickUpdate} />
+          <MdClose
+            size={16}
+            data-tip="Deletar"
+            onClick={() => removeTodo(todo.id)}
+          />
+          <ToolTip place="top" type="dark" effect="float" />
+        </div>
+      </TodoItem>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
