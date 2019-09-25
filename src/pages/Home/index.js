@@ -25,19 +25,19 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.fetchTodos();
+    const { getTodosRequest } = this.props;
+
+    getTodosRequest();
+    this.filterTodos();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.search !== this.props.location.search) {
-      console.log('diff');
-      this.fetchTodos();
+      this.filterTodos();
     }
   }
 
-  fetchTodos = () => {
-    const { getTodosRequest } = this.props;
-
+  filterTodos = () => {
     if (this.props.location.search) {
       const query = queryString.parse(this.props.location.search);
 
@@ -48,17 +48,13 @@ class Home extends Component {
         filter: true,
         category: query.category,
       });
-
-      return;
+    } else {
+      this.setState({
+        ...this.state,
+        filter: false,
+        category: '',
+      });
     }
-
-    this.setState({
-      ...this.state,
-      filter: false,
-      category: '',
-    });
-
-    getTodosRequest();
   };
 
   onClickUpdate = todo => {
