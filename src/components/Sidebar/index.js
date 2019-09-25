@@ -11,6 +11,9 @@ import {
   MdBook,
 } from 'react-icons/md';
 
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators as TodosActions } from '../../store/ducks/todos';
@@ -88,7 +91,7 @@ class Sidebar extends Component {
         <Separator />
 
         <ul>
-          <Navigation to="/">
+          <Navigation to="?category=health">
             <li>
               <div>
                 <MdFavorite size={20} color="#D93644" />
@@ -97,7 +100,7 @@ class Sidebar extends Component {
               <small>{health} itens</small>
             </li>
           </Navigation>
-          <Navigation to="/">
+          <Navigation to="/?category=work">
             <li>
               <div>
                 <MdWork size={20} color="#223946" />
@@ -106,7 +109,7 @@ class Sidebar extends Component {
               <small>{work} itens</small>
             </li>
           </Navigation>
-          <Navigation to="/">
+          <Navigation to="/?category=personal">
             <li>
               <div>
                 <MdPerson size={20} color="#0367A6" />
@@ -115,7 +118,7 @@ class Sidebar extends Component {
               <small>{personal} itens</small>
             </li>
           </Navigation>
-          <Navigation to="/">
+          <Navigation to="/?category=shopping">
             <li>
               <div>
                 <MdAddShoppingCart size={20} color="#FF7830" />
@@ -149,4 +152,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Sidebar);
+)(withRouter(Sidebar));

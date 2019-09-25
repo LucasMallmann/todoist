@@ -1,9 +1,13 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
+
 import { ActionCreators as TodosActions } from '../../store/ducks/todos';
 
 import { Container, TodoContainer } from './styles';
@@ -15,12 +19,47 @@ class Home extends Component {
     selectedTodo: {},
     editable: false,
     add: false,
+    filter: false,
+    category: '',
+    todos: [],
   };
 
   componentDidMount() {
-    const { getTodosRequest } = this.props;
-    getTodosRequest();
+    this.fetchTodos();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search !== this.props.location.search) {
+      console.log('diff');
+      this.fetchTodos();
+    }
+  }
+
+  fetchTodos = () => {
+    const { getTodosRequest } = this.props;
+
+    if (this.props.location.search) {
+      const query = queryString.parse(this.props.location.search);
+
+      if (!query.category) return;
+
+      this.setState({
+        ...this.state,
+        filter: true,
+        category: query.category,
+      });
+
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      filter: false,
+      category: '',
+    });
+
+    getTodosRequest();
+  };
 
   onClickUpdate = todo => {
     this.setState({
@@ -38,14 +77,15 @@ class Home extends Component {
   };
 
   render() {
-    const { selectedTodo, editable, add } = this.state;
+    const { selectedTodo, editable, add, category, filter } = this.state;
     const {
       todos: { data },
     } = this.props;
 
     return (
       <Container>
-        <h1>Página inicial</h1>
+        {category ? <h1>Tarefas para {category}</h1> : <h1>Página inicial</h1>}
+
         <TodoContainer>
           {data.map(todo =>
             selectedTodo.id === todo.id && editable ? (
@@ -53,6 +93,14 @@ class Home extends Component {
                 onClickCancel={() => this.onClickCancel()}
                 todo={todo}
               />
+            ) : filter && category ? (
+              category === todo.category ? (
+                <Todo
+                  key={todo.id}
+                  todo={todo}
+                  onClickUpdate={() => this.onClickUpdate(todo)}
+                />
+              ) : null
             ) : (
               <Todo
                 key={todo.id}
@@ -88,4 +136,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(withRouter(Home));

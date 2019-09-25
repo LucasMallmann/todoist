@@ -17,7 +17,7 @@ class Todo extends Component {
   };
 
   handleComplete = (e, todoSelected) => {
-    const { completeTodo, updateTodo } = this.props;
+    const { updateTodo } = this.props;
 
     const todo = { ...todoSelected };
 
