@@ -56,11 +56,6 @@ const reducer = (state = initialState, action) => {
 
     case Types.MOVE_TODO:
       return produce(state, draft => {
-        // const todo = draft.data.find(todo => todo.id === action.payload.id);
-        // const index = draft.data.indexOf(todo);
-        // if (index >= 0) {
-        //   draft.data.splice([[index, 1], [action.payload.atIndex, 0, todo]]);
-        // }
         draft.data = action.payload.orderedTodos;
       });
 

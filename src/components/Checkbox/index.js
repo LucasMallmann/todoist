@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   CheckboxContainer,
@@ -19,3 +20,8 @@ export default function Checkbox({ className, checked, ...props }) {
     </CheckboxContainer>
   );
 }
+
+Checkbox.propTypes = {
+  className: PropTypes.string,
+  checked: PropTypes.bool,
+};

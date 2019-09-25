@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable no-console */
@@ -7,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+import PropTypes from 'prop-types';
 
 import { ActionCreators as TodosActions } from '../../store/ducks/todos';
 
@@ -22,6 +24,29 @@ class Home extends Component {
     filter: false,
     category: '',
     todos: [],
+  };
+
+  static propTypes = {
+    todos: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf({
+        id: PropTypes.number,
+        task: PropTypes.string,
+        category: PropTypes.string,
+        completed: PropTypes.bool,
+      }),
+    }).isRequired,
+    todo: PropTypes.shape({
+      id: PropTypes.number,
+      task: PropTypes.string,
+      category: PropTypes.string,
+      completed: PropTypes.bool,
+    }),
+    getTodosRequest: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string,
+    }),
+    moveTodo: PropTypes.func.isRequired,
   };
 
   componentDidMount() {

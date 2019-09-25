@@ -1,6 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { MdClose, MdModeEdit } from 'react-icons/md';
 import ToolTip from 'react-tooltip';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +15,27 @@ import Checkbox from '../Checkbox';
 class Todo extends Component {
   state = {
     checked: false,
+  };
+
+  static propTypes = {
+    todos: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf({
+        id: PropTypes.number,
+        task: PropTypes.string,
+        category: PropTypes.string,
+        completed: PropTypes.bool,
+      }),
+    }).isRequired,
+    todo: PropTypes.shape({
+      id: PropTypes.number,
+      task: PropTypes.string,
+      category: PropTypes.string,
+      completed: PropTypes.bool,
+    }),
+    updateTodo: PropTypes.func.isRequired,
+    onClickUpdate: PropTypes.func.isRequired,
+    removeTodo: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -42,7 +64,7 @@ class Todo extends Component {
   };
 
   render() {
-    const { todo, onClickUpdate, removeTodo, moveTodo } = this.props;
+    const { todo, onClickUpdate, removeTodo } = this.props;
     const { checked } = this.state;
 
     return (

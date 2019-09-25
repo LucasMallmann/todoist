@@ -1,3 +1,4 @@
+/* eslint-disable react/static-property-placement */
 /* eslint-disable react/no-did-update-set-state */
 /* eslint-disable operator-assignment */
 import React, { Component } from 'react';
@@ -10,9 +11,9 @@ import {
   MdAddShoppingCart,
   MdBook,
 } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,6 +30,18 @@ class Sidebar extends Component {
     personal: 0,
     shopping: 0,
     book: 0,
+  };
+
+  static propTypes = {
+    todos: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf({
+        id: PropTypes.number,
+        task: PropTypes.string,
+        category: PropTypes.string,
+        completed: PropTypes.bool,
+      }),
+    }).isRequired,
   };
 
   componentDidUpdate(prevProps) {

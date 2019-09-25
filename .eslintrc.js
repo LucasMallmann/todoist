@@ -24,5 +24,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/state-in-constructor': 'off',
     'no-param-reassign': 'off',
+    'react/require-default-props': 'off',
+    'react/destructuring-assignment': 'off',
+    'react/static-property-placement': 'off',
   },
 };

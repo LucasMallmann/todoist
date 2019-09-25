@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { ActionCreators as TodosActions } from '../../store/ducks/todos';
 
@@ -10,6 +11,27 @@ class TodoForm extends Component {
   state = {
     task: '',
     update: false,
+  };
+
+  static propTypes = {
+    todos: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf({
+        id: PropTypes.number,
+        task: PropTypes.string,
+        category: PropTypes.string,
+        completed: PropTypes.bool,
+      }),
+    }).isRequired,
+    todo: PropTypes.shape({
+      id: PropTypes.number,
+      task: PropTypes.string,
+      category: PropTypes.string,
+      completed: PropTypes.bool,
+    }),
+    updateTodo: PropTypes.func.isRequired,
+    onClickCancel: PropTypes.func,
+    addTodo: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
