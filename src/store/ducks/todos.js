@@ -7,6 +7,7 @@ export const Types = {
   REMOVE_TODO: '@todo/REMOVE_TODO',
   UPDATE_TODO: '@todo/UPDATE_TODO',
   COMPLETE_TODO: '@todo/COMPLETE_TODO',
+  MOVE_TODO: '@todo/MOVE_TODO',
 };
 
 const initialState = {
@@ -53,6 +54,16 @@ const reducer = (state = initialState, action) => {
         }
       });
 
+    case Types.MOVE_TODO:
+      return produce(state, draft => {
+        // const todo = draft.data.find(todo => todo.id === action.payload.id);
+        // const index = draft.data.indexOf(todo);
+        // if (index >= 0) {
+        //   draft.data.splice([[index, 1], [action.payload.atIndex, 0, todo]]);
+        // }
+        draft.data = action.payload.orderedTodos;
+      });
+
     default:
       return state;
   }
@@ -81,6 +92,10 @@ export const ActionCreators = {
   completeTodo: id => ({
     type: Types.COMPLETE_TODO,
     payload: { id },
+  }),
+  moveTodo: orderedTodos => ({
+    type: Types.MOVE_TODO,
+    payload: { orderedTodos },
   }),
 };
 

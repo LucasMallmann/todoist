@@ -16,6 +16,7 @@ export const TodoItem = styled.li`
 
   &:hover {
     background: ${darken(0.03, '#fafafa')};
+    cursor: move;
 
     > div {
       display: block;

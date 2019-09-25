@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import RLDD from 'react-list-drag-and-drop/lib/RLDD';
 
 export const Container = styled.div`
   padding: 30px;
@@ -42,7 +43,7 @@ export const Container = styled.div`
   }
 `;
 
-export const TodoContainer = styled.ul`
+export const TodoContainer = styled(RLDD)`
   margin-top: 20px;
 
   &:last-child {

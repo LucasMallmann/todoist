@@ -76,14 +76,18 @@ class Home extends Component {
     const { selectedTodo, editable, add, category, filter } = this.state;
     const {
       todos: { data },
+      moveTodo,
     } = this.props;
 
     return (
       <Container>
         {category ? <h1>Tarefas para {category}</h1> : <h1>Página inicial</h1>}
 
-        <TodoContainer>
-          {data.map(todo =>
+        <TodoContainer
+          inlineStyle={{ marginTop: '20px' }}
+          items={data}
+          onChange={moveTodo}
+          itemRenderer={todo =>
             selectedTodo.id === todo.id && editable ? (
               <TodoForm
                 onClickCancel={() => this.onClickCancel()}
@@ -104,8 +108,8 @@ class Home extends Component {
                 onClickUpdate={() => this.onClickUpdate(todo)}
               />
             )
-          )}
-        </TodoContainer>
+          }
+        />
 
         {add ? (
           <TodoForm onClickCancel={() => this.onClickCancel()} />

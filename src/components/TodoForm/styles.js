@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form } from '@rocketseat/unform';
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled.form`
   width: 100%;
   padding: 10px 0;
   border-top: 1px solid #ddd;

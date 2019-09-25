@@ -16,6 +16,13 @@ class Todo extends Component {
     checked: false,
   };
 
+  componentDidMount() {
+    const { todo } = this.props;
+    this.setState({
+      checked: todo.completed,
+    });
+  }
+
   handleComplete = (e, todoSelected) => {
     const { updateTodo } = this.props;
 
@@ -35,7 +42,7 @@ class Todo extends Component {
   };
 
   render() {
-    const { todo, onClickUpdate, removeTodo, updateTodo } = this.props;
+    const { todo, onClickUpdate, removeTodo, moveTodo } = this.props;
     const { checked } = this.state;
 
     return (

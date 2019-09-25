@@ -1,5 +1,4 @@
-import React from 'react';
-import { Input } from '@rocketseat/unform';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -7,12 +6,49 @@ import { ActionCreators as TodosActions } from '../../store/ducks/todos';
 
 import { StyledForm } from './styles';
 
-function TodoForm({ onClickCancel, todo, addTodo, todos }) {
-  function handleSubmit({ task }) {
+class TodoForm extends Component {
+  state = {
+    task: '',
+    update: false,
+  };
+
+  componentDidMount() {
+    const { todo } = this.props;
+
+    if (todo) {
+      this.setState({
+        task: todo.task,
+        update: true,
+      });
+    }
+
+    this.task.focus();
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
     let id = 1;
 
-    const { data } = todos;
+    const { data } = this.props.todos;
+    const { update } = this.state;
+
+    if (update) {
+      const { todo } = this.props;
+
+      const updatedTodo = {
+        ...todo,
+        task: this.state.task,
+      };
+
+      this.props.updateTodo(updatedTodo);
+      this.props.onClickCancel();
+
+      return;
+    }
+
     const lastTodo = data[data.length - 1];
+    const { task } = this.state;
 
     if (lastTodo) {
       id = lastTodo.id + 1;
@@ -23,21 +59,33 @@ function TodoForm({ onClickCancel, todo, addTodo, todos }) {
       id,
     };
 
-    addTodo(todo);
-    onClickCancel();
-  }
+    this.props.addTodo(todo);
+    this.props.onClickCancel();
+  };
 
-  return (
-    <StyledForm onSubmit={handleSubmit}>
-      <Input name="task" defaultValue={todo ? todo.task : ''} />
-      <div>
-        <button type="submit">Salvar</button>
-        <button type="button" onClick={() => onClickCancel()}>
-          Cancelar
-        </button>
-      </div>
-    </StyledForm>
-  );
+  render() {
+    const { onClickCancel } = this.props;
+    const { task } = this.state;
+
+    return (
+      <StyledForm onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          value={task}
+          onChange={e => this.setState({ task: e.target.value })}
+          ref={input => {
+            this.task = input;
+          }}
+        />
+        <div>
+          <button type="submit">Salvar</button>
+          <button type="button" onClick={() => onClickCancel()}>
+            Cancelar
+          </button>
+        </div>
+      </StyledForm>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
